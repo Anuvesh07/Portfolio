@@ -11,15 +11,13 @@
   width: 500px;
   height: 500px;
   margin: 0 auto;
-  /* border: 2px dashed #1976d2;  debug border removed */
-  /* background: rgba(100, 181, 246, 0.07);  debug background removed */
 }
 
 .skill-circle.core {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(1);
   width: 64px;
   height: 64px;
   background: #1976d2;
@@ -31,7 +29,16 @@
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 12px rgba(25, 118, 210, 0.15);
-  z-index: 10;
+  z-index: 20;
+  cursor: pointer;
+  transition: box-shadow 0.3s, background 0.3s;
+  opacity: 1 !important;
+  border: 3px solid #fff;
+}
+
+.skill-circle.core:hover {
+  box-shadow: 0 8px 32px #1976d2cc, 0 0 0 8px #1976d244;
+  background: #1565c0;
 }
 
 .skill-circle {
@@ -48,17 +55,21 @@
   justify-content: center;
   box-shadow: 0 2px 8px rgba(33, 150, 243, 0.13);
   pointer-events: auto;
-  transition: transform 0.2s, box-shadow 0.2s;
   z-index: 5;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.2);
+  transition: all 0.7s cubic-bezier(.68,-0.55,.27,1.55);
 }
 
-.skill-circle.core {
-  z-index: 10;
+.skills-circles.revealed .skill-circle:not(.core) {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  pointer-events: auto;
 }
 
 .skill-circle:hover {
   box-shadow: 0 4px 16px #1976d2aa;
-  transform: scale(1.08);
+  transform: translate(-50%, -50%) scale(1.12);
   z-index: 20;
 }
 
