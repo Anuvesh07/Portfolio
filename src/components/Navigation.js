@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 function Navigation({ theme }) {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -12,11 +15,20 @@ function Navigation({ theme }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location]);
+
+  // Interactive window dot handlers
+  const handleDotClick = (color) => {
+    if (color === 'red') alert('Close (Demo)');
+    if (color === 'yellow') alert('Minimize (Demo)');
+    if (color === 'green') alert('Maximize (Demo)');
+  };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   // Interactive window dot handlers
@@ -34,10 +46,36 @@ function Navigation({ theme }) {
           <span className="window-dot dot-yellow" onClick={() => handleDotClick('yellow')} tabIndex={0} role="button" aria-label="Minimize" />
           <span className="window-dot dot-green" onClick={() => handleDotClick('green')} tabIndex={0} role="button" aria-label="Maximize" />
         </div>
-        <div className="nav-links">
-          <button onClick={() => scrollToSection('about')}>About</button>
-          <button onClick={() => scrollToSection('skills')}>Skills</button>
-          <button onClick={() => scrollToSection('projects')}>Projects</button>
+        
+        {/* Mobile hamburger menu */}
+        <button 
+          className="mobile-menu-toggle"
+          onClick={toggleMobileMenu}
+          aria-label="Toggle mobile menu"
+          aria-expanded={isMobileMenuOpen}
+        >
+          <span className={`hamburger ${isMobileMenuOpen ? 'open' : ''}`}></span>
+        </button>
+        
+        <div className={`nav-links ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
+          <Link to="/" className={location.pathname === '/' ? 'active' : ''}>
+            Home
+          </Link>
+          <Link to="/about" className={location.pathname === '/about' ? 'active' : ''}>
+            About
+          </Link>
+          <Link to="/skills" className={location.pathname === '/skills' ? 'active' : ''}>
+            Skills
+          </Link>
+          <Link to="/projects" className={location.pathname === '/projects' ? 'active' : ''}>
+            Projects
+          </Link>
+          <Link to="/leetcode" className={location.pathname === '/leetcode' ? 'active' : ''}>
+            LeetCode
+          </Link>
+          <Link to="/github" className={location.pathname === '/github' ? 'active' : ''}>
+            GitHub
+          </Link>
         </div>
       </div>
     </nav>
