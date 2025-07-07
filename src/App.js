@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import './components/Skills.css';
@@ -14,16 +14,9 @@ import LeetCodeGraph from './components/LeetCodeGraph';
 import GitHubGraph from './components/GitHubGraph';
 
 function App() {
-  const [theme, setTheme] = useState('dark');
-
-  const handleToggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
-    document.body.classList.toggle('light-mode');
-  };
-
   return (
     <Router>
-      <div className={`App ${theme}-mode`}>
+      <div className={`App`}>
         {/* Floating profile avatar, outside nav bar */}
         <div
           className="floating-profile-avatar"
@@ -35,7 +28,7 @@ function App() {
         >
           <span>AC</span>
         </div>
-        <Navigation theme={theme} />
+        <Navigation />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
