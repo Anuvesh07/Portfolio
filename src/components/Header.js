@@ -6,7 +6,7 @@ function Header() {
   return (
     <header className="header">
       <div className="header-content">
-        <h1 className="header-title">Anuvesh Chilwal</h1>
+        <h1 className="header-title"><span className="colorful-name">Anuvesh Chilwal</span></h1>
         <p className="header-tagline">Computer Science Student | Web & Java Developer</p>
         <div className="header-social">
           <a
