@@ -936,7 +936,46 @@ html {
 .dot-yellow { background: #ffbd2e; }
 .dot-green { background: #27c93f; }
 
-/* Remove floating-profile-avatar and avatar-top-center styles */
+.floating-profile-avatar {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  z-index: 2001;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #282c34;
+  color: #ffbd2e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 2px solid #ffbd2e;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.13);
+  transition: background 0.2s, color 0.2s, border 0.2s, box-shadow 0.2s;
+}
+.floating-profile-avatar:hover, .floating-profile-avatar:focus {
+  background: #ffbd2e;
+  color: #23272e;
+  border: 2px solid #ffbd2e;
+  outline: none;
+}
+
+.light-mode .floating-profile-avatar {
+  background: #f7fafc;
+  color: #23272e;
+  border: 2px solid #e2e8f0;
+}
+.light-mode .floating-profile-avatar:hover, .light-mode .floating-profile-avatar:focus {
+  background: #ffbd2e;
+  color: #23272e;
+  border: 2px solid #ffbd2e;
+}
+
+/* Remove unused .profile-area and .nav-avatar styles if present */
+.profile-area, .nav-avatar { display: none !important; }
 
 .light-mode section h2 {
   color: #1e293b;
@@ -1199,3 +1238,12 @@ html {
   box-shadow: 0 2px 16px rgba(60,60,120,0.18), 0 2px 12px rgba(167,139,250,0.13);
   transition: all 0.35s cubic-bezier(0.4,0,0.2,1), box-shadow 0.25s;
 }
+.avatar-top-center {
+  top: 16px !important;
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%) !important;
+  z-index: 2003 !important;
+  box-shadow: 0 4px 16px rgba(60,60,120,0.18), 0 2px 12px rgba(167,139,250,0.13);
+}
+
