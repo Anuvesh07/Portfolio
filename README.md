@@ -18,7 +18,7 @@
 ## 🛼 quick spin-up
 
 ```bash
-git clone <repo>
-cd <folder-with-no-spaces-because-oCD>
+git clone https://github.com/Anuvesh07/Portfolio.git
+cd Portfolio
 npm install
 npm start
