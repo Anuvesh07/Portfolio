@@ -1,8 +1,8 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Button } from '@/components/ui/Button';
+import { LiquidButton } from '@/components/ui/liquid-glass-button';
 import { Project } from '@/lib/types';
 import { ANIMATION_VARIANTS, Z_INDEX } from '@/lib/constants';
 import Image from 'next/image';
@@ -23,7 +23,7 @@ interface ProjectModalProps {
   onClose: () => void;
 }
 
-export default function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
+function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // Reset image index when project changes
@@ -126,15 +126,15 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                   </span>
                 )}
               </div>
-              <Button
+              <LiquidButton
                 variant="outline"
-                size="sm"
+                size="icon"
                 onClick={onClose}
                 className="p-2 h-8 w-8"
                 title="Close modal (Esc)"
               >
                 <X className="h-4 w-4" />
-              </Button>
+              </LiquidButton>
             </div>
 
             {/* Content */}
@@ -148,7 +148,8 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, 896px"
-                    priority
+                    priority={currentImageIndex === 0}
+                    loading={currentImageIndex === 0 ? 'eager' : 'lazy'}
                   />
                   
                   {/* Navigation Arrows */}
@@ -260,32 +261,35 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                 {/* Action Buttons */}
                 <div className="flex flex-wrap gap-3 pt-4 border-t border-gray-200 dark:border-gray-700">
                   {project.liveUrl && (
-                    <Button
-                      variant="primary"
+                    <LiquidButton
+                      variant="default"
+                      size="lg"
                       onClick={() => handleExternalLink(project.liveUrl!)}
                       className="flex items-center gap-2"
                     >
                       <ExternalLink className="h-4 w-4" />
                       View Live Demo
-                    </Button>
+                    </LiquidButton>
                   )}
                   {project.githubUrl && (
-                    <Button
+                    <LiquidButton
                       variant="outline"
+                      size="lg"
                       onClick={() => handleExternalLink(project.githubUrl!)}
                       className="flex items-center gap-2"
                     >
                       <Github className="h-4 w-4" />
                       View Source Code
-                    </Button>
+                    </LiquidButton>
                   )}
-                  <Button
+                  <LiquidButton
                     variant="secondary"
+                    size="lg"
                     onClick={onClose}
                     className="ml-auto"
                   >
                     Close
-                  </Button>
+                  </LiquidButton>
                 </div>
               </div>
             </div>
@@ -295,3 +299,5 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
     </AnimatePresence>
   );
 }
+
+export default memo(ProjectModal);

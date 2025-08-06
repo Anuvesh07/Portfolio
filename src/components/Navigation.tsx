@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import { Button } from './ui/Button';
+import { LiquidButton } from './ui/liquid-glass-button';
 import { ThemeToggle } from './ThemeToggle';
 import { NAV_ITEMS } from '@/lib/constants';
 import { useActiveSection } from '@/hooks/useActiveSection';
@@ -190,16 +190,16 @@ export function Navigation() {
               className="md:hidden flex items-center space-x-2"
             >
               <ThemeToggle />
-              <Button
+              <LiquidButton
                 variant="outline"
-                size="sm"
+                size="icon"
                 onClick={() => setIsOpen(!isOpen)}
                 className="menu-button p-2"
                 aria-label={isOpen ? 'Close menu' : 'Open menu'}
                 aria-expanded={isOpen}
               >
                 {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-              </Button>
+              </LiquidButton>
             </motion.div>
           </div>
         </nav>
@@ -231,15 +231,15 @@ export function Navigation() {
                 {/* Mobile menu header */}
                 <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-800">
                   <span className="text-lg font-semibold gradient-text">Menu</span>
-                  <Button
+                  <LiquidButton
                     variant="outline"
-                    size="sm"
+                    size="icon"
                     onClick={() => setIsOpen(false)}
                     className="p-2"
                     aria-label="Close menu"
                   >
                     <X className="h-4 w-4" />
-                  </Button>
+                  </LiquidButton>
                 </div>
 
                 {/* Mobile menu items */}

@@ -3,7 +3,7 @@
 import React from 'react';
 import { Moon, Sun } from 'lucide-react';
 import { useTheme } from './ThemeProvider';
-import { Button } from './ui/Button';
+import { LiquidButton } from './ui/liquid-glass-button';
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -15,15 +15,15 @@ export function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <Button
+      <LiquidButton
         variant="outline"
-        size="sm"
+        size="icon"
         aria-label="Toggle theme"
         className="relative"
       >
         <Sun className="h-4 w-4" />
         <span className="sr-only">Toggle theme</span>
-      </Button>
+      </LiquidButton>
     );
   }
 
@@ -55,9 +55,9 @@ export function ThemeToggle() {
   };
 
   return (
-    <Button
+    <LiquidButton
       variant="outline"
-      size="sm"
+      size="icon"
       onClick={toggleTheme}
       aria-label={getLabel()}
       className="relative"
@@ -65,6 +65,6 @@ export function ThemeToggle() {
       {getIcon()}
       {theme === 'dark' && <Moon className="h-4 w-4 hidden dark:block" />}
       <span className="sr-only">{getLabel()}</span>
-    </Button>
+    </LiquidButton>
   );
 }
